@@ -13,6 +13,18 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   void _login() {
+    // Validasi sederhana untuk Sprint 2
+    if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('NIM dan Password tidak boleh kosong!'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    // Jika terisi, pindah ke Halaman Beranda
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => const HomePage()),
@@ -35,11 +47,16 @@ class _LoginPageState extends State<LoginPage> {
                   'Smart Attendance PTIK',
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
+                const SizedBox(height: 8),
+                const Text(
+                  'Sprint 2 - Presensi Digital Mahasiswa',
+                  style: TextStyle(fontSize: 14, color: Colors.grey),
+                ),
                 const SizedBox(height: 32),
                 TextField(
                   controller: _emailController,
                   decoration: const InputDecoration(
-                    labelText: 'Email/NIM',
+                    labelText: 'NIM / Email',
                     border: OutlineInputBorder(),
                     prefixIcon: Icon(Icons.person),
                   ),
